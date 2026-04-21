@@ -14,11 +14,15 @@ plugins {
 	// The reason is that Gradle isolates class loaders between subprojects and some plugins can't handle it.
 	// Root project's class loader however is available to all subprojects and importing plugin here (but not applying it) solves the issue
 	alias(libs.plugins.kotlin.jvm) apply false
+	alias(libs.plugins.android.library) apply false
+	alias(libs.plugins.kotlin.multiplatform) apply false
+	alias(libs.plugins.jetbrains.compose) apply false
 }
 
 dependencies {
 	implementation(project(":redreader-common"))
 	implementation(project(":redreader-datamodel"))
+	implementation(project(":shared"))
 
 	coreLibraryDesugaring(libs.jdk.desugar)
 
