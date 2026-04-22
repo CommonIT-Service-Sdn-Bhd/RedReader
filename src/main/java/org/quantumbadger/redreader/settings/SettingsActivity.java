@@ -38,7 +38,7 @@ public class SettingsActivity extends ViewsBaseActivity {
 				.beginTransaction()
 				.setReorderingAllowed(false)
 				.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-				.replace(R.id.single_fragment_container, SettingsFragment.class, bundle)
+				.replace(R.id.single_fragment_container, panel.equals("about") ? AboutComposeFragment.class : SettingsFragment.class, bundle)
 				.addToBackStack("Settings: " + panel)
 				.commit();
 	}
