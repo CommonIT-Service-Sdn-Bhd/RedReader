@@ -15,32 +15,34 @@
  * along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.quantumbadger.redreader.compose.ui
+package org.quantumbadger.redreader.shared.ui
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import org.quantumbadger.redreader.compose.theme.LocalComposeTheme
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun RRIconButton(
 	onClick: () -> Unit,
-	@DrawableRes icon: Int,
-	@StringRes contentDescription: Int,
+	iconPainter: Painter,
+	contentDescription: String?,
 	modifier: Modifier = Modifier,
-	tint: Color? = null,
+	tint: Color = Color.Unspecified,
 ) {
-	val theme = LocalComposeTheme.current
-
-	org.quantumbadger.redreader.shared.ui.RRIconButton(
+	IconButton(
 		onClick = onClick,
-		iconPainter = painterResource(id = icon),
-		contentDescription = stringResource(id = contentDescription),
-		modifier = modifier,
-		tint = tint ?: theme.postCard.iconColor
-	)
+		modifier = modifier
+	) {
+		Icon(
+			modifier = Modifier.size(24.dp),
+			painter = iconPainter,
+			contentDescription = contentDescription,
+			tint = tint
+		)
+	}
 }
