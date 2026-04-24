@@ -52,13 +52,7 @@ class RedditTermsActivity : ViewsBaseActivity() {
 
 		window.navigationBarColor = Color.rgb(0x55, 0x55, 0x55)
 
-		setBaseActivityListing(R.layout.reddit_terms_activity)
-
 		val launchMainOnClose = intent.getBooleanExtra(extraLaunchMain, false)
-
-		fun onClick(@IdRes id: Int, action: () -> Unit) {
-			findViewById<MaterialButton>(id).setOnClickListener { action() }
-		}
 
 		fun onDone() {
 			if (launchMainOnClose) {
@@ -67,21 +61,32 @@ class RedditTermsActivity : ViewsBaseActivity() {
 			finish()
 		}
 
-		onClick(R.id.terms_button_view) {
-			LinkHandler.onLinkClicked(
-				this,
-				UriString("https://www.redditinc.com/policies/user-agreement-april-18-2023")
-			)
+		val composeView = androidx.compose.ui.platform.ComposeView(this).apply {
+			setContent {
+				org.quantumbadger.redreader.shared.RedditTermsScreen(
+					title = getString(R.string.reddit_terms_title),
+					message = getString(R.string.reddit_terms_message),
+					viewButtonText = getString(R.string.reddit_terms_view_button),
+					declineButtonText = getString(R.string.terms_decline),
+					acceptButtonText = getString(R.string.terms_accept),
+					onViewTermsClicked = {
+						LinkHandler.onLinkClicked(
+							this@RedditTermsActivity,
+							UriString("https://www.redditinc.com/policies/user-agreement-april-18-2023")
+						)
+					},
+					onDeclineClicked = {
+						PrefsUtility.declineRedditUserAgreement()
+						onDone()
+					},
+					onAcceptClicked = {
+						PrefsUtility.acceptRedditUserAgreement()
+						onDone()
+					}
+				)
+			}
 		}
 
-		onClick(R.id.terms_button_decline) {
-			PrefsUtility.declineRedditUserAgreement()
-			onDone()
-		}
-
-		onClick(R.id.terms_button_accept) {
-			PrefsUtility.acceptRedditUserAgreement()
-			onDone()
-		}
+		setBaseActivityListing(composeView)
 	}
 }
