@@ -58,6 +58,7 @@ import org.quantumbadger.redreader.compose.ctx.LocalLauncher
 import org.quantumbadger.redreader.compose.ctx.RRComposeContextTest
 import org.quantumbadger.redreader.compose.theme.LocalComposeTheme
 import org.quantumbadger.redreader.compose.theme.StyledText
+import org.quantumbadger.redreader.shared.ui.RRButton
 
 @Composable
 fun RRErrorView(error: RRError) {
