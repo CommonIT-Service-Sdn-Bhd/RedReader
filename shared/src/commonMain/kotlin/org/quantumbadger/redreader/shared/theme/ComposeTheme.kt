@@ -31,3 +31,13 @@ data class ComposeThemeButton(
 	val border: Color? = null,
 	val borderThickness: Dp? = null,
 )
+
+@Immutable
+data class ComposeThemeLinkButton(
+	val title: TextStyle,
+	val subtitle: TextStyle,
+	val shape: Shape,
+	val borderColor: Color,
+	val borderThickness: Dp,
+	val iconColor: Color
+)
