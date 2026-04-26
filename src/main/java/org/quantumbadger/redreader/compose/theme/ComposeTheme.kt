@@ -19,6 +19,7 @@ package org.quantumbadger.redreader.compose.theme
 
 import android.app.Activity
 import org.quantumbadger.redreader.shared.theme.ComposeThemeButton
+import org.quantumbadger.redreader.shared.theme.ComposeThemeLinkButton
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -81,15 +82,6 @@ interface ComposeThemeError {
 	val secondaryButton: ComposeThemeButton
 }
 
-@Immutable
-data class ComposeThemeLinkButton(
-	val title: TextStyle,
-	val subtitle: TextStyle,
-	val shape: Shape,
-	val borderColor: Color,
-	val borderThickness: Dp,
-	val iconColor: Color
-)
 
 interface ComposeTheme {
 	val dropdownMenu: ComposeThemeDropdownMenu
